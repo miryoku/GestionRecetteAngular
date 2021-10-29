@@ -1,0 +1,16 @@
+<form [formGroup]="fg" (ngSubmit)="login()">
+    <div class="p-fluid">
+        <div class="p-field">
+            <label for="firstname1">speudo</label>
+            <input formControlName="speudo" type="text" pInputText>
+        </div>
+        <div class="p-field">
+            <label for="lastname1">password</label>
+            <input formControlName="mdp" type="password" pInputText>
+        </div>
+    </div>
+    <div>
+        <input type="submit" pInputText />
+    </div>
+</form>
+<p>d</p>
