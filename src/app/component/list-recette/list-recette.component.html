@@ -1,9 +1,13 @@
-<p-card>
-    <ng-template pTemplate="header">
-        Header content here
-    </ng-template>
-    Body Content xxxxx
-    <ng-template pTemplate="footer">
-        Footer content here
-    </ng-template>
-</p-card>
+<div class="wrapper">
+    <div *ngFor="let model of models" class="pointer">
+        
+        <p-card header="{{model.nom}}" [style]="{width: '360px'}" styleClass="p-card-shadow"  (click)="detail(model.id)">
+            <ng-template pTemplate="header">
+                <img alt="image {{model.nom}}" src="{{model.img}}">
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+            </ng-template>
+        </p-card>
+    </div>
+</div>

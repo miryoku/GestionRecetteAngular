@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Recette } from 'src/app/core/model/Recette';
+import { RecetteService } from 'src/app/core/services/recette.service';
 
 
 @Component({
@@ -8,10 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListRecetteComponent implements OnInit {
 
-  constructor() {}
+  models !: Recette[];
+
+  constructor(private recetteService:RecetteService,
+    public router: Router,) {}
 
   ngOnInit() {
+    this.loadRecette()
   }
 
+  private loadRecette(){
+    this.recetteService.getRecetteList().subscribe(
+      data=>{
+        this.models=data
+      }
+    )
+  }
 
+  detail(id:number){
+    this.router.navigateByUrl("/Recette/"+id)
+  }
 }

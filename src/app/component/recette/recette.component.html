@@ -1,0 +1,40 @@
+<div *ngIf="models">
+    <button *ngIf="authServ.user">ok</button>
+    {{models.recette.nom}} <br />
+    preparation : {{models.recette.prepration}} <br />
+    repos : {{models.recette.repos}}<br />
+    cuisson : {{models.recette.cuisson}}<br />
+    pour {{models.recette.nbPersonne}} personne<br />
+    rating : {{models.recette.rating}} <br />
+    Categories : {{models.recette.nomCategorie}}<br />
+    <p-fieldset legend="Etapes">
+        <div *ngFor="let model of models.etapes">
+            {{model.etape}} :
+            {{model.instruction}}
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Ingredients">
+        <div class="wrapper">
+            <div *ngFor="let model of models.composant">
+                {{model.quantite}}
+                {{model.unites.unite}}
+                {{model.ingredients.nom}}
+                {{model.ingredients.img}}
+
+            </div>
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="ustensiles">
+        <div class="wrapper">
+            <div *ngFor="let model of models.ustensiles">
+                {{model.quantite}}
+                {{model.ustensiles.nom}}
+            </div>
+        </div>
+    </p-fieldset>
+
+</div>
+
+<div *ngIf="!models" class="loading"></div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, Message } from 'primeng/api';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -12,8 +12,7 @@ export class AppComponent {
   title = 'GestionRecette';
 
   userSub: any
-
-
+ 
   items!: MenuItem[];
 
   activeItem!: MenuItem;
@@ -21,15 +20,13 @@ export class AppComponent {
   constructor(public authServ: AuthService,
     private router: Router,) {
     this.listMenu()
-
-
   }
 
   ngOnInit(): void {
    
     this.userSub = this.authServ.IsLog.subscribe(user => {
        this.listMenu()
-      if (user) {
+      if (user||this.authServ.token) {
         this.items.push({ label: 'Deconnexion', icon: 'pi pi-sign-out', command: (click) => this.logout(), visible: true })
       }
       else {
@@ -47,7 +44,6 @@ export class AppComponent {
       { label: 'Catégorie', icon: 'pi pi-palette' },
       { label: 'User', icon: 'pi pi-user' },
 
-
     ];
     this.activeItem = this.items[0];
   }
@@ -57,4 +53,7 @@ export class AppComponent {
     this.router.navigateByUrl("/")
 
   }
+
+
+
 }

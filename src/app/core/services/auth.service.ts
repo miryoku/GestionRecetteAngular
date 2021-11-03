@@ -14,12 +14,11 @@ export class AuthService {
 
   IsLog = new BehaviorSubject<User|null>(this.user);
 
-
   private readonly TOKEN_KEY = 'TOKEN';
   private readonly url: string = environment.url_uri
 
   public token!: string | null
-  
+  jwtdecode !:any
   constructor(private httpClient: HttpClient) {
     this.token=localStorage.getItem(this.TOKEN_KEY);
     
@@ -27,7 +26,9 @@ export class AuthService {
 
   public get user(): User | null {
     if (!this.token) return null;
-    return jwt_decode<User>(this.token);
+    this.jwtdecode=jwt_decode<User>(this.token)
+   // this.jwtdecode.role=this.jwtdecode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+    return this.jwtdecode;
   }
 
   login(data: User): Observable<void> {
@@ -50,6 +51,7 @@ export class AuthService {
     return this.httpClient.get<string>(this.url+'refreshToken').pipe(map(token=>{
       localStorage.setItem(this.TOKEN_KEY,token);
       this.token=token;
+      this.IsLog.next(this.user);
     }))
   }
 }

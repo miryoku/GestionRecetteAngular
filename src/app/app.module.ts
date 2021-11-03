@@ -10,23 +10,28 @@ import { TokenInterceptor } from './core/Interceptors/token.interceptor';
 import { LoginComponent } from './component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
-
+import { RecetteComponent } from './component/recette/recette.component';
+import {FieldsetModule} from 'primeng/fieldset';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListRecetteComponent,
-    LoginComponent
+    LoginComponent,
+    RecetteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     TabMenuModule,
     CardModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
+    FieldsetModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass : TokenInterceptor,multi : true}
