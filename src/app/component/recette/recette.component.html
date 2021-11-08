@@ -1,5 +1,5 @@
-<div *ngIf="models">
-    <button *ngIf="authServ.user">ok</button>
+<div *ngIf="models && admin==0">
+    <button *ngIf="authServ.user?.Role=='admin'" (click)="modeAdmin()">Mode admin</button>
     {{models.recette.nom}} <br />
     preparation : {{models.recette.prepration}} <br />
     repos : {{models.recette.repos}}<br />
@@ -21,8 +21,7 @@
                 {{model.unites.unite}}
                 {{model.ingredients.nom}}
                 {{model.ingredients.img}}
-
-            </div>
+               </div>
         </div>
     </p-fieldset>
 
@@ -38,3 +37,69 @@
 </div>
 
 <div *ngIf="!models" class="loading"></div>
+
+<div *ngIf="models && admin==1 && categories">
+    <button *ngIf="authServ.user?.Role=='admin'" (click)="modeUser()">Mode user</button>
+    <form [formGroup]="fg" (ngSubmit)="recetteUpdate()">
+        <div>
+            <label for="">Nom de la recette</label>
+            <input type="text" formControlName="nomRecette">
+        </div>
+        <div>
+            <label for="">Preparation</label>
+            <input type="number" formControlName="preparation">
+        </div>
+        <div>
+            <label for="">repos</label>
+            <input type="number" formControlName="repos" >
+        </div>
+        <div>
+            <label for="">cuisson</label>
+            <input type="number" formControlName="cuisson" >
+        </div>
+        <div>
+            <label for="">nombre de personne</label>
+            <input type="number" formControlName="nbPersonne" >
+        </div>
+        <div>
+            <label for="">categories</label>
+            <select formControlName="idCat" >
+                <ng-container *ngFor="let categorie of categories">
+                    <option *ngIf="models.recette.nomCategorie==categorie.nom" selected="true" autocomplete="false" value="{{categorie.id}}">ah {{categorie.nom}} </option>
+                    <option *ngIf="models.recette.nomCategorie!=categorie.nom" value="{{categorie.id}}"> {{categorie.nom}} </option>
+
+                </ng-container>
+            </select>
+            
+        </div>
+        <button>update</button>
+    </form>
+    
+    
+    <p-fieldset legend="Etapes">
+        <div *ngFor="let model of models.etapes">
+            {{model.etape}} :
+            {{model.instruction}}
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Ingredients">
+        <div class="wrapper">
+            <div *ngFor="let model of models.composant">
+                {{model.quantite}}
+                {{model.unites.unite}}
+                {{model.ingredients.nom}}
+                {{model.ingredients.img}}
+               </div>
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="ustensiles">
+        <div class="wrapper">
+            <div *ngFor="let model of models.ustensiles">
+                {{model.quantite}}
+                {{model.ustensiles.nom}}
+            </div>
+        </div>
+    </p-fieldset>
+</div>

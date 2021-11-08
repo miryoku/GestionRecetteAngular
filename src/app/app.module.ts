@@ -31,7 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-    FieldsetModule
+    FieldsetModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass : TokenInterceptor,multi : true}

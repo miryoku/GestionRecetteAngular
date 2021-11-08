@@ -27,7 +27,7 @@ export class AuthService {
   public get user(): User | null {
     if (!this.token) return null;
     this.jwtdecode=jwt_decode<User>(this.token)
-   // this.jwtdecode.role=this.jwtdecode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+    this.jwtdecode.Role=this.jwtdecode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
     return this.jwtdecode;
   }
 

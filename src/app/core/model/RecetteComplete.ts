@@ -12,6 +12,7 @@ interface Etape {
 }
 
 interface Ustensile {
+  id: number;
   ustensiles: Ustensiles;
   quantite: number;
 }
@@ -23,6 +24,7 @@ interface Ustensiles {
 }
 
 interface Composant {
+  id: number;
   ingredients: Ingredients;
   unites: Unites;
   quantite: number;
